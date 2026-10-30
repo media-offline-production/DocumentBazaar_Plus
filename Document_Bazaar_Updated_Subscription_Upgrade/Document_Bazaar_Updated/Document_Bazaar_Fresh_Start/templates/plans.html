@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Membership plans · Document Bazaar{% endblock %}
+{% block content %}
+<section class="page-shell plans-shell">
+  <div class="page-intro">
+    <div class="eyebrow muted-eyebrow">MEMBERSHIP</div>
+    <h1>Choose how you <em>grow.</em></h1>
+    <p>Start free, or choose a creator plan when you need more uploads and tools. Creators keep 75% of each document sale; Document Bazaar commission is 25%.</p>
+  </div>
+  <div class="plan-grid">
+    <article class="plan-card">
+      <div class="eyebrow muted-eyebrow">NEW & OCCASIONAL USERS</div><h2>Basic</h2><div class="plan-price">Free</div>
+      <p>For getting started with the marketplace.</p>
+      <ul><li>10 uploads a month</li><li>Personal library</li><li>Buy and download</li><li>Standard support</li></ul>
+      {% if user and user.plan == 'basic' %}<span class="button button-dark plan-current">Your current plan</span>{% elif user %}<form method="post" action="{{ url_for('subscribe', plan='basic') }}"><button class="button button-dark" type="submit">Choose Basic</button></form>{% else %}<a class="button button-dark" href="{{ url_for('register') }}">Choose Basic</a>{% endif %}
+    </article>
+    <article class="plan-card plan-featured">
+      <div class="eyebrow muted-eyebrow">ACTIVE CREATORS & READERS</div><h2>Pro</h2><div class="plan-price">₹199<small>/month</small></div>
+      <p>More room for regular creators.</p>
+      <ul><li>100 uploads a month</li><li>Higher storage</li><li>Advanced search</li><li>Sales analytics</li><li>Priority support</li></ul>
+      <form method="post" action="{{ url_for('subscribe', plan='pro') }}"><button class="button button-dark" type="submit">Choose Pro</button></form>
+    </article>
+    <article class="plan-card">
+      <div class="eyebrow muted-eyebrow">PROFESSIONAL CREATORS</div><h2>Super Ultra</h2><div class="plan-price">₹499<small>/month</small></div>
+      <p>Tools for high-volume publishing.</p>
+      <ul><li>500 uploads a month</li><li>Highest storage</li><li>Detailed analytics</li><li>Bulk upload</li><li>Featured profile</li><li>Premium support</li></ul>
+      <form method="post" action="{{ url_for('subscribe', plan='super_ultra') }}"><button class="button button-dark" type="submit">Choose Super Ultra</button></form>
+    </article>
+  </div>
+  <p class="plan-note">Basic is available immediately. Pro and Super Ultra checkout will be enabled after recurring subscription payments and server-side payment verification are configured. Selecting a paid plan here does not charge you or activate paid features.</p>
+</section>
+{% endblock %}
